@@ -28,7 +28,7 @@ def stored_ip(update=None):
             return content[0].strip()
 
 def main():
-    old_ip = stored_ip() #50.53.94.9
+    old_ip = stored_ip()
     h1 = httplib.HTTPConnection('ipecho.net')
     h1.request("GET", "/plain")
     current_ip = h1.getresponse().read().strip()
