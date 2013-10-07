@@ -29,9 +29,12 @@ def stored_ip(update=None):
 
 def main():
     old_ip = stored_ip()
-    h1 = httplib.HTTPConnection('ipecho.net')
-    h1.request("GET", "/plain")
-    current_ip = h1.getresponse().read().strip()
+    h1 = httplib.HTTPConnection('icanhazip.com')
+    h1.request("GET", "/")
+    resp = h1.getresponse()
+    if resp.status != 200:
+        return
+    current_ip = resp.read().strip()
     if current_ip and old_ip != current_ip:
         send_email(old_ip, current_ip)
         stored_ip(update=current_ip)
